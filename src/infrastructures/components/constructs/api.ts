@@ -6,6 +6,8 @@ import * as dynamodb from '@aws-cdk/aws-dynamodb'
 import * as acm from '@aws-cdk/aws-certificatemanager'
 import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2'
 import * as apigateway from '@aws-cdk/aws-apigateway'
+//import * as route53 from '@aws-cdk/aws-route53'
+//import * as alias from '@aws-cdk/aws-route53-targets'
 
 interface DemoApi {
   stageName: string
@@ -64,38 +66,35 @@ export class ApiConstruct extends Construct {
       }),
     })
 
-    const httpApiStage = api.addStage('HttpApiStage', {
-      autoDeploy: true,
-      stageName: props.stageName,
-    })
-
-    const httpApiDomainName = new apigatewayv2.CfnDomainName(
+    const apiDomainName = new apigatewayv2.DomainName(
       this,
       'HttpApiDomainName',
       {
         domainName: props.domain,
-        domainNameConfigurations: [
-          {
-            certificateArn: props.cert.certificateArn,
-            endpointType: 'REGIONAL',
-          },
-        ],
+        certificate: acm.Certificate.fromCertificateArn(
+          this,
+          'HttpApiCert',
+          props.cert.certificateArn
+        ),
       }
     )
-    new apigatewayv2.CfnApiMapping(this, 'HttpApiMapping', {
-      apiId: api.httpApiId,
-      domainName: httpApiDomainName.domainName,
-      stage: httpApiStage.stageName,
-      apiMappingKey: httpApiStage.stageName,
+
+    api.addStage('HttpApiStage', {
+      autoDeploy: true,
+      stageName: props.stageName,
+      domainMapping: {
+        domainName: apiDomainName,
+        mappingKey: props.stageName,
+      },
     })
 
-    // TODO: not compatible yet
+    // TODO: not supported yet
     //const hostedZone = route53.HostedZone.fromHostedZoneAttributes(
     //  this,
     //  'HostedZone',
     //  {
     //    hostedZoneId: props.hostedZoneId,
-    //    zoneName: props.adminDomain
+    //    zoneName: props.domain,
     //  }
     //)
 
@@ -103,7 +102,7 @@ export class ApiConstruct extends Construct {
     //  recordName: 'api',
     //  zone: hostedZone,
     //  target: route53.AddressRecordTarget.fromAlias(
-    //    new alias.ApiGatewayDomain(apiDomain)
+    //    new alias.ApiGatewayDomain(apiDomainName)
     //  )
     //})
   }
