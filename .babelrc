@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "@use-cases/i-wanna": "./src/use-cases/i-wanna",
+        "@controllers/i-wanna": "./src/controllers/i-wanna",
+        "@presenters": "./src/presenters",
+        "@externals/drivers": "./src/externals/drivers",
+        "@infrastructures": "./src/infrastructures",
+        "@modules": "./src/modules"
+      }
+    }]
+  ]
+}

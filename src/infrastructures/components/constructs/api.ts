@@ -26,14 +26,15 @@ export class ApiConstruct extends Construct {
   ) {
     super(scope, id)
 
-    const pathToDist = '../../../../dist'
+    const pathToSrc = '../../..'
 
     const createMonologue = new LambdaFunction(this, 'saySomething', {
-      code: lambda.Code.asset(
-        path.join(__dirname, `${pathToDist}/say-something`)
+      entry: path.join(
+        __dirname,
+        `${pathToSrc}/externals/events/api/say-something.ts`
       ),
       runtime: lambda.Runtime.NODEJS_12_X,
-      handler: 'index.saySomething',
+      handler: 'saySomething',
       environment: {
         MONOLOGUE_TABLE: props.table.tableName,
         ALLOWED_ORIGIN: props.allowedOrigin,
