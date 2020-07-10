@@ -11,7 +11,8 @@ module.exports = {
     '^@presenters/(.*)': '<rootDir>/src/presenters/$1',
     '^@test/utils/(.*)': '<rootDir>/test/utils/$1',
     '^@infrastructures/(.*)': '<rootDir>/src/infrastructures/$1',
-    '^@modules/(.*)': '<rootDir>/src/modules/$1'
+    '^@modules/(.*)': '<rootDir>/src/modules/$1',
+    '^@middlewares/(.*)': '<rootDir>/src/middlewares/$1'
   },
   testMatch: [
     '<rootDir>/src/**/*.spec.ts'

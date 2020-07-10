@@ -20,6 +20,7 @@
   "private": true,
   "devDependencies": {
     "@types/aws-lambda": "^8.10.57",
+    "@types/bunyan": "^1.8.6",
     "@types/chance": "^1.1.0",
     "@types/jest": "^26.0.3",
     "@types/node": "^14.0.20",
@@ -35,6 +36,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jest": "^23.17.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "glob": "^7.1.6",
     "jest": "^26.1.0",
     "jest-extended": "^0.11.5",
     "prettier": "^2.0.5",
@@ -57,6 +59,7 @@
     "@aws-cdk/aws-route53": "^1.51.0",
     "@aws-cdk/aws-route53-targets": "^1.51.0",
     "@aws-cdk/core": "^1.51.0",
-    "aws-sdk": "^2.713.0"
+    "aws-sdk": "^2.713.0",
+    "bunyan": "^1.8.14"
   }
 }

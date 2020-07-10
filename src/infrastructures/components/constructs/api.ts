@@ -38,6 +38,7 @@ export class ApiConstruct extends Construct {
         MONOLOGUE_TABLE: props.table.tableName,
         ALLOWED_ORIGIN: props.allowedOrigin,
       },
+      tracing: lambda.Tracing.ACTIVE,
     })
     props.table.grantWriteData(createMonologue.lambdaFunction)
 

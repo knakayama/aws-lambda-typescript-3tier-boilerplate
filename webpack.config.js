@@ -1,12 +1,20 @@
 const path = require('path')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const glob = require('glob')
 
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   target: 'node',
-  entry: {
-    'say-something': path.resolve(__dirname, './src/externals/events/api/say-something.ts')
+  entry: () => {
+    const entries = {}
+    const matches = glob.sync(path.resolve(__dirname, './src/externals/events/**/*.ts'))
+    matches.forEach(match => {
+      Object.assign(entries, {
+        [path.basename(match, '.ts')]: match
+      })
+    })
+    return entries
   },
   externals: [{
     'aws-sdk': 'commonjs aws-sdk'

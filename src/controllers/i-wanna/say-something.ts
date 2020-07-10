@@ -10,6 +10,7 @@ import {
 import { ResponseBuilder } from '@presenters/response-builder'
 import { SaySomethingUseCase } from '@use-cases/i-wanna/say-something'
 import { Monologue } from '@externals/drivers/database/monologue-interfaces'
+import { Logger } from '@modules/utils/logger'
 
 export class SaySomethingController {
   constructor(private readonly _saySomethingUseCase: SaySomethingUseCase) {}
@@ -19,7 +20,7 @@ export class SaySomethingController {
     context: ApiContext,
     callback: ApiCallback
   ): void => {
-    console.log(event)
+    const logger = Logger.getLogger()
     if (!event.body) {
       return ResponseBuilder.badRequest(
         ErrorCodes.BadRequest,
@@ -30,7 +31,7 @@ export class SaySomethingController {
 
     const requestBody: Monologue = JSON.parse(event.body) as Monologue
 
-    console.log(requestBody)
+    logger.info(JSON.stringify(requestBody))
     if (!requestBody.something) {
       ResponseBuilder.badRequest(
         ErrorCodes.BadRequest,

@@ -22,7 +22,10 @@
       ],
       "@modules/*": [
         "src/modules/*"
-      ]
+      ],
+      "@middlewares/*": [
+        "src/middlewares/*"
+      ],
     },
     "module": "commonjs",
     "target": "es6",
