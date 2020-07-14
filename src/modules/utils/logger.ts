@@ -20,4 +20,8 @@ export class Logger {
   info(message: string): void {
     Logger.logger._logger.info(message)
   }
+
+  error(message: string): void {
+    Logger.logger._logger.error(message)
+  }
 }
