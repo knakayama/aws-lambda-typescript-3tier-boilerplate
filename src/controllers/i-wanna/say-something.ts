@@ -43,7 +43,7 @@ export class SaySomethingController {
     if (SomethingToSayValidator.isSomethingInvalid(requestBody.something)) {
       ResponseBuilder.badRequest(
         ErrorCodes.BadRequest,
-        'Please specify a valid book title!',
+        'Please specify a something valid!',
         callback
       )
     }

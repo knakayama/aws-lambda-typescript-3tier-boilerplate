@@ -51,12 +51,12 @@ export class MonologueTableUtils {
   }
 
   async batchWriteItems<T>(items: T[]): Promise<void> {
-    const bookWriteRequests: DynamoDB.DocumentClient.WriteRequest[] = MonologueTableUtils.toWriteRequests(
+    const writeRequests: DynamoDB.DocumentClient.WriteRequest[] = MonologueTableUtils.toWriteRequests(
       items
     )
     const param: DynamoDB.DocumentClient.BatchWriteItemInput = {
       RequestItems: {
-        [this.tableName]: bookWriteRequests,
+        [this.tableName]: writeRequests,
       },
     }
     await this.dynamoDBD.batchWrite(param).promise()

@@ -4,7 +4,7 @@ import { Monologue } from '@externals/drivers/database/monologue-interfaces'
 
 process.env.MONOLOGUE_TABLE = 'Monologue'
 
-describe('BookDatabaseDriver', () => {
+describe('MonologueDatabaseDriver', () => {
   const monologueTableUtils = new MonologueTableUtils(
     process.env.MONOLOGUE_TABLE!
   )

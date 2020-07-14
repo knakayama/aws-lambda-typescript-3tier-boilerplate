@@ -36,7 +36,7 @@ describe('SaySomethingUseCase', () => {
     describe('When everthing is ok', () => {
       const monologues = MonologueTableUtils.generateMonologues()
 
-      test('should return a book', async () => {
+      test('should return empty', async () => {
         jest
           .spyOn(monologueDatabaseDriver, 'createMonologue')
           .mockResolvedValueOnce()

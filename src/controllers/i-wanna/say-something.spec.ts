@@ -120,7 +120,7 @@ describe('SaySomethingController', () => {
       test('should return Bad Request', async () => {
         const errorResult = new BadRequestResult(
           ErrorCodes.BadRequest,
-          'Please specify a valid book title!'
+          'Please specify a something valid!'
         )
 
         await callAndCheckError(
