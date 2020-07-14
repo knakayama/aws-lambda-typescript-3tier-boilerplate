@@ -18,7 +18,7 @@ export class DynamoDBUtils {
   )
 
   static async createTable(tableName: string): Promise<void> {
-    const fixturePath: string = path.join(
+    const fixturePath = path.join(
       __dirname,
       `../fixtures/tables/${tableName}.json`
     )
