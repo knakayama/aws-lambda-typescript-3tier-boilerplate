@@ -2,7 +2,7 @@ import { Stack, App, StackProps } from '@aws-cdk/core'
 import { Table } from '@infrastructures/components/constructs/table'
 
 export class Database extends Stack {
-  readonly dtsTable: Table
+  readonly monologueTable: Table
 
   constructor(
     readonly parent: App,
@@ -11,6 +11,6 @@ export class Database extends Stack {
   ) {
     super(parent, name, props)
 
-    this.dtsTable = new Table(this, 'DTSTable')
+    this.monologueTable = new Table(this, 'MonologueTable')
   }
 }

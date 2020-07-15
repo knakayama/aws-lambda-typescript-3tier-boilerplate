@@ -25,7 +25,7 @@ class DemoApp extends App {
     new ApiStack(this, 'Api', {
       ...stackProps,
       ...{
-        table: database.dtsTable.table,
+        table: database.monologueTable.table,
         cert: sslTLSCerts.apiCert.dnsValidatedCert,
         allowedOrigin: ContextUtils.getContext(this, 'allowedOrigin'),
         domain: `api.${process.env.DOMAIN!}`,
