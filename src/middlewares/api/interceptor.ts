@@ -4,12 +4,15 @@ import {
   ApiEvent,
   ApiHandler,
 } from '@presenters/interfaces'
-import { SaySomethingController } from '@controllers/i-wanna/say-something'
 import { Logger } from '@modules/utils/logger'
 
 export class ApiInterceptor {
   constructor(
-    private readonly _saySomethingController: SaySomethingController
+    private readonly _controllerMethod: (
+      event: ApiEvent,
+      context: ApiContext,
+      callback: ApiCallback
+    ) => void
   ) {}
 
   saySomething: ApiHandler = (
@@ -18,6 +21,6 @@ export class ApiInterceptor {
     callback: ApiCallback
   ): void => {
     Logger.getLogger(event.headers['x-amzn-trace-id'])
-    this._saySomethingController.saySomething(event, context, callback)
+    this._controllerMethod(event, context, callback)
   }
 }

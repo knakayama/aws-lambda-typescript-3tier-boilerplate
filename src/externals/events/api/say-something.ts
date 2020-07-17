@@ -6,6 +6,6 @@ import { ApiInterceptor } from '@middlewares/api/interceptor'
 const monologueDatabaseDriver = new MonologueDatabaseDriver()
 const saySomethingUseCase = new SaySomethingUseCase(monologueDatabaseDriver)
 const saySomethingController = new SaySomethingController(saySomethingUseCase)
-const apiInterceptor = new ApiInterceptor(saySomethingController)
+const apiInterceptor = new ApiInterceptor(saySomethingController.saySomething)
 
 export const saySomething = apiInterceptor.saySomething
