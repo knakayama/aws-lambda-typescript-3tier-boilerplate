@@ -7,14 +7,16 @@ module.exports = {
   devtool: 'inline-source-map',
   target: 'node',
   entry: () => {
-    const entries = {}
-    const matches = glob.sync(path.resolve(__dirname, './src/externals/events/**/*.ts'))
-    matches.forEach(match => {
-      Object.assign(entries, {
-        [path.basename(match, '.ts')]: match
-      })
-    })
-    return entries
+    return glob
+      .sync(path.resolve(__dirname, './src/externals/events/**/*.ts'))
+      .reduce((attr, cur) => {
+        return {
+          ...attr,
+          ...{
+            [path.basename(cur, '.ts')]: cur
+          }
+        }
+      }, {})
   },
   externals: [{
     'aws-sdk': 'commonjs aws-sdk'
